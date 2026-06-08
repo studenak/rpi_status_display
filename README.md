@@ -28,23 +28,22 @@ Minimalistický Python ovladač a skript pro monitorování stavu zařízení (v
 ## Použití
 1. Povolte SPI rozhraní v systému (`sudo raspi-config` -> Interface Options -> SPI).
 2. Spusťte hlavní skript:
-   ```bash
-   python3 main.py
+      python3 main.py
 
 sudo apt update
 sudo apt install -y git python3-spidev python3-gpiod
-git clone https://github.com/studenak/rpi_status_display.git ~/nas-monitor
-cd ~/nas-monitor
+git clone https://github.com/studenak/rpi_status_display.git ~/rpi-monitor
+cd ~/rpi-monitor
 sudo raspi-config
 -
-sudo bash -c 'cat <<EOF > /etc/systemd/system/nas-monitor.service
+sudo bash -c 'cat <<EOF > /etc/systemd/system/rpi-monitor.service
 [Unit]
-Description=NAS Monitor OLED and LED Service
+Description=RPi Monitor OLED and LED Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/petr/nas-monitor/main.py
-WorkingDirectory=/home/petr/nas-monitor
+ExecStart=/usr/bin/python3 /home/petr/rpi-monitor/main.py
+WorkingDirectory=/home/petr/rpi-monitor
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
@@ -55,5 +54,5 @@ WantedBy=multi-user.target
 EOF'
 -
 sudo systemctl daemon-reload
-sudo systemctl enable nas-monitor.service
-sudo systemctl start nas-monitor.service
+sudo systemctl enable rpi-monitor.service
+sudo systemctl start rpi-monitor.service
