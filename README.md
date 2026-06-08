@@ -35,7 +35,9 @@ sudo apt install -y git python3-spidev python3-gpiod
 git clone https://github.com/studenak/rpi_status_display.git ~/rpi-monitor
 cd ~/rpi-monitor
 sudo raspi-config
+
 -
+
 sudo bash -c 'cat <<EOF > /etc/systemd/system/rpi-monitor.service
 [Unit]
 Description=RPi Monitor OLED and LED Service
@@ -52,6 +54,7 @@ User=root
 [Install]
 WantedBy=multi-user.target
 EOF'
+
 -
 sudo systemctl daemon-reload
 sudo systemctl enable rpi-monitor.service
